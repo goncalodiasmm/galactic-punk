@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Base...</title>
+    <title>Galactic Punk</title>
     <style>
         #recursos {
             display: none;
@@ -35,13 +35,16 @@
         //...
 
         function inicia() {
+            // TELA
             tela = new Tela(document.getElementById("tela"));
             contexto = tela.contexto;
             continua = true;
             contador = 0;
 
-            fundo = new Imagem(0, 0, document.getElementById('cenario'));
-            sprite = new Imagem(100, tela.altura * 0.5, document.getElementById('sprite-teste'))
+            // FUNDO
+            fundo = new Imagem(0, 0, document.getElementById('fundo'));
+
+            // ASTEROIDES
             asteroides = [
                 new Imagem(0, 0, document.getElementById("asteroide-1")),
                 new Imagem(0, 0, document.getElementById("asteroide-2")),
@@ -52,12 +55,14 @@
                 new Imagem(0, 0, document.getElementById("asteroide-7")),
                 new Imagem(0, 0, document.getElementById("asteroide-8")),
             ];
-            for (var i = 0; i < 10; i++) {
-                asteroide1.x = Math.random() * tela.largura + tela.largura;
-                asteroide1.y = Math.random() * (tela.altura - asteroide1.altura);
-                asteroide1.deltaX = -2;
-                asteroides.push(asteroide1);
+            for (var i = 0; i < asteroides.length; i++) {
+                asteroides[i].x = Math.random() * tela.largura + tela.largura;
+                asteroides[i].y = Math.random() * (tela.altura - asteroides[i].altura);
+                asteroides[i].deltaX = -3;
             }
+
+            // SPRITES
+            sprite = new Imagem(tela.largura * 0.1, tela.altura * 0.5, document.getElementById('sprite-1'))
             //...
             ratoX = 0;
             ratoY = 0;
@@ -73,20 +78,17 @@
         function desenha() {
             contexto.clearRect(0, 0, tela.largura, tela.altura);
             fundo.desenha(tela);
-            sprite.desenha(tela)
             for (var i = 0; i < asteroides.length; i++) {
                 asteroides[i].desenha(tela);
                 if (asteroides[i].x + asteroides[i].largura < 0) {
                     asteroides[i].x = tela.largura;
                     asteroides[i].y = Math.random() * (tela.altura - asteroides[i].altura);
-
                     asteroides[i].visivel = true;
                     asteroides[i].activo = true;
-
-                    // if (Math.random() < 0.005) ...
                 }
             }
-            //...
+
+            sprite.desenha(tela)
 
             if (continua) {
                 contador++;
@@ -162,9 +164,9 @@
         <img id="asteroide-6" src="./recursos/asteroide-6-bw.png" alt="asteroide-6">
         <img id="asteroide-7" src="./recursos/asteroide-7-bw.png" alt="asteroide-7">
         <img id="asteroide-8" src="./recursos/asteroide-8-bw.png" alt="asteroide-8">
-        <img id="cenario" src="./recursos/cenario.jpg" alt="cenario">
+        <img id="fundo" src="./recursos/fundo.jpg" alt="fundo">
         <img id="power-up" src="./recursos/power-up.png" alt="power-up">
-        <img id="sprite-teste" src="./recursos/sprite-teste.png" alt="sprite-teste">
+        <img id="sprite-1" src="./recursos/sprite-1.png" alt="sprite-1">
         <img id="sprite-2" src="./recursos/sprite-2.png" alt="sprite-2">
     </div>
 </body>
