@@ -57,7 +57,7 @@
             for (let i = 0; i < asteroides.length; i++) {
                 asteroides[i].x = Math.random() * tela.largura + tela.largura;
                 asteroides[i].y = Math.random() * (tela.altura - asteroides[i].altura);
-                asteroides[i].deltaX = -3;
+                asteroides[i].deltaX = -4;
             }
 
             // SPRITES
@@ -69,8 +69,9 @@
             ];
 
             // POWER-UP
-            powerUp = new Imagem(tela.largura / 2, tela.altura / 2, document.getElementById('power-up'))
-            powerUp.deltaX = -3
+            powerUp = new Imagem(0, 0, document.getElementById('power-up'))
+            powerUp.x = Math.random() * tela.largura + (tela.largura * 2);
+            powerUp.deltaX = -4
 
             ratoX = 0;
             ratoY = 0;
@@ -99,9 +100,10 @@
 
             // ASTEROIDES
             for (let i = 0; i < asteroides.length; i++) {
-                if (contador % 100 == 0) {
-                    asteroides[i].desenha(tela)
-                    console.log(contador);
+                asteroides[i].desenha(tela)
+                if (asteroides[i].x + asteroides[i].largura < 0) {
+                    asteroides[i].x = Math.random() * tela.largura + tela.largura;
+                    asteroides[i].y = Math.random() * (tela.altura - asteroides[i].altura);
                 }
             }
 
@@ -110,15 +112,18 @@
             sprite[0].y = Math.sin(angulo) * amplitude + tela.altura / 2
             angulo += 0.05
 
+            // POWER-UP
+            powerUp.desenha(tela)
+            if (powerUp.x + powerUp.largura < 0) {
+                powerUp.x = Math.random() * tela.largura + tela.largura;
+                powerUp.y = Math.random() * (tela.altura - powerUp.altura);
+            }
+
             if (continua) {
                 contador++;
                 window.requestAnimationFrame(desenha);
             }
 
-            // POWER-UP
-            if (contador % 100 == 0) {
-                powerUp.desenha(tela)
-            }
         }
 
         function processaBotaoPremido(rato) {
@@ -143,13 +148,13 @@
                 //...
             }
             if (tecla.code == "ArrowLeft") {    // esquerda
-                amplitude += -3
+                amplitude += 3
             }
             if (tecla.code == "ArrowUp") {      // cima
                 //...
             }
             if (tecla.code == "ArrowRight") {   // direita
-                amplitude += 3
+                amplitude += -3
             }
             if (tecla.code == "ArrowDown") {    // baixo
                 //...
