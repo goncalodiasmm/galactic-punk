@@ -4,26 +4,22 @@
 <head>
     <meta charset="utf-8">
     <title>Galactic Punk</title>
-    <style>
-        #recursos {
-            display: none;
-        }
-
-        #tela {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-    </style>
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+    <!-- ICONES -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet">
+    <!-- BIBLIOTECA DE JOGO -->
     <script src="Ludoteca.js"></script>
     <script>
         var tela;
         var contexto;
         var continua;
         var contador;
+
         var fundo;
         var asteroides;
+        var sprites;
+        var powerup;
 
         var racioX;
         var racioY;
@@ -33,9 +29,6 @@
 
         var angulo;
         var amplitude;
-
-
-        //...
 
         function inicia() {
             // TELA
@@ -61,7 +54,7 @@
                 new Imagem(0, 0, document.getElementById("asteroide-7")),
                 new Imagem(0, 0, document.getElementById("asteroide-8")),
             ];
-            for (var i = 0; i < asteroides.length; i++) {
+            for (let i = 0; i < asteroides.length; i++) {
                 asteroides[i].x = Math.random() * tela.largura + tela.largura;
                 asteroides[i].y = Math.random() * (tela.altura - asteroides[i].altura);
                 asteroides[i].deltaX = -3;
@@ -74,13 +67,17 @@
                 new Imagem(tela.largura * 0.1, tela.altura * 0.5, document.getElementById('sprite-1')),
                 new Imagem(tela.largura * 0.1, tela.altura * 0.5, document.getElementById('sprite-2'))
             ];
-            //...
+
+            // POWER-UP
+            powerUp = new Imagem(tela.largura / 2, tela.altura / 2, document.getElementById('power-up'))
+            powerUp.deltaX = -3
+
             ratoX = 0;
             ratoY = 0;
 
             racioX = tela.largura / tela.larguraFinal;
             racioY = tela.altura / tela.alturaFinal;
-            //...
+
             tela.elemento.onmousedown = processaBotaoPremido;
             tela.elemento.onmouseup = processaBotaoLibertado;
             tela.elemento.onmousemove = processaMovimento;
@@ -101,13 +98,10 @@
             }
 
             // ASTEROIDES
-            for (var i = 0; i < asteroides.length; i++) {
-                asteroides[i].desenha(tela);
-                if (asteroides[i].x + asteroides[i].largura < 0) {
-                    asteroides[i].x = tela.largura;
-                    asteroides[i].y = Math.random() * (tela.altura - asteroides[i].altura);
-                    asteroides[i].visivel = true;
-                    asteroides[i].activo = true;
+            for (let i = 0; i < asteroides.length; i++) {
+                if (contador % 100 == 0) {
+                    asteroides[i].desenha(tela)
+                    console.log(contador);
                 }
             }
 
@@ -119,6 +113,11 @@
             if (continua) {
                 contador++;
                 window.requestAnimationFrame(desenha);
+            }
+
+            // POWER-UP
+            if (contador % 100 == 0) {
+                powerUp.desenha(tela)
             }
         }
 
@@ -179,8 +178,17 @@
 </head>
 
 <body>
-    <canvas id="tela" width="1280" height="673">O seu <em>browser</em> não suporta o elemento
-        <code>canvas</code>!</canvas>
+    <div id="contentor-jogo">
+        <canvas id="tela" width="1280" height="673">O seu <em>browser</em> não suporta o elemento
+            <code>canvas</code>!
+        </canvas>
+        <div id="pontuacao">
+            <h1>665</h1>
+        </div>
+        <button id="pausa">
+            <i class="ri-pause-circle-line text-xl"></i>
+        </button>
+    </div>
     <div id="recursos">
         <img id="asteroide-1" src="./recursos/asteroide-1-bw.png" alt="asteroide-1">
         <img id="asteroide-2" src="./recursos/asteroide-2-bw.png" alt="asteroide-2">

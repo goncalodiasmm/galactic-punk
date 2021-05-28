@@ -1,17 +1,17 @@
 MOVIMENTAÇÃO:
 1. Fazer movimentar o sprite no eixo y:
-   -> seta direita - diminui amplitude
-   -> seta esquerda - aumenta amplitude
-
+   -> seta direita - diminui amplitude 👍
+   -> seta esquerda - aumenta amplitude 👍
 2. Controlar frequência de movimentação dos asteroides
-3. Movimentar BG para a esquerda
+3. Movimentar BG para a esquerda 👍
 
-3. Colisão sprite com asteroides
-4. Colisão sprite com power-up
+COLISÕES:
+1. Colisão sprite com asteroides
+2. Colisão sprite com power-up
    -> Invencibilidade: desativa colisão sprite com asteroides
    -> Slow Motion: velocidade asteroides diminui, velocidade y sprite diminui
 
-5.Progressão de Jogo (variáveis tempo, pontuação, distância)
-   -> Passagem de tempo aumenta velocidade dos asteroides;
-   -> Pontuação é afetada pela distância;
-   -> Distância: Quanto maior sprite.y, menor distância x
+PROGRESSÃO DE JOGO (variáveis tempo, pontuação, distância):
+1. Passagem de tempo aumenta velocidade dos asteroides;
+2. Pontuação é afetada pela distância;
+3. Distância: Quanto maior sprite.y, menor distância x
