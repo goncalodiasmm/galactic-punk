@@ -1,0 +1,28 @@
+{
+  "name": "galactic-punk",
+  "version": "1.0.0",
+  "description": "",
+  "main": "GalacticPunk.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {
+    "build-css": "tailwindcss build src/style.css -o public/style.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/goncalodiasmm/galactic-punk.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/goncalodiasmm/galactic-punk/issues"
+  },
+  "homepage": "https://github.com/goncalodiasmm/galactic-punk#readme",
+  "devDependencies": {
+    "autoprefixer": "^10.2.6",
+    "postcss": "^8.3.0",
+    "tailwindcss": "^2.1.4"
+  }
+}
