@@ -7,7 +7,7 @@
     "doc": "doc"
   },
   "scripts": {
-    "build-css": "tailwindcss build src/style.css -o public/style.css"
+    "build-css": "tailwindcss build src/style.css -o build/tailwind.css"
   },
   "repository": {
     "type": "git",
