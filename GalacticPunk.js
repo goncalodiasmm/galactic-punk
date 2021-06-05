@@ -25,9 +25,6 @@ var contexto
 var continua
 var contador
 
-var estadoJogo
-var pontuacao
-
 var fundo
 var asteroides
 var sprites
@@ -50,7 +47,11 @@ function inicia() {
   contador = 0
 
   // PONTUAÇÃO
-  pontuacao = document.getElementById('pontuacao')
+  pontuacaoAtual = document.getElementById('pontuacao-atual')
+
+  pontuacaoMaxima = document.getElementById('pontuacao-maxima')
+  melhor = localStorage.getItem('Pontuação Máxima')
+  pontuacaoMaxima.innerHTML = melhor
 
   // FUNDO
   fundo = [
@@ -131,6 +132,7 @@ function desenha() {
     for (let i = 0; i < sprites.length; i++) {
       if (sprites[i].colide(asteroides[i])) {
         continua = false
+        localStorage.setItem('Pontuação Máxima', contador)
       }
     }
   }
@@ -154,7 +156,7 @@ function desenha() {
 
   if (continua) {
     contador++
-    pontuacao.innerHTML = contador
+    pontuacaoAtual.innerHTML = contador
     requestAnimationFrame(desenha)
   }
 }
