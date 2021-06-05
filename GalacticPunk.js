@@ -14,6 +14,12 @@ function comecarJogo() {
 }
 
 // ECRÃ DE JOGO
+function pausarJogo() {
+  const ecraJogo = document.getElementById('ecra-jogo')
+  ecraJogo.classList.add('bg-black')
+}
+
+// MECÂNICA DE JOGO
 var tela
 var contexto
 var continua
@@ -46,18 +52,10 @@ function inicia() {
   // PONTUAÇÃO
   pontuacao = document.getElementById('pontuacao')
 
-  // ESTADO DE JOGO
-  estadoJogo = {
-    atual: 0,
-    inicial: 0,
-    jogo: 1,
-    final: 2,
-  }
-
   // FUNDO
   fundo = [
     new Imagem(0, 0, document.getElementById('fundo')),
-    new Imagem(tela.largura, 0, document.getElementById('fundo')),
+    new Imagem(tela.largura - 1, 0, document.getElementById('fundo')),
   ]
 
   // ASTEROIDES
@@ -78,7 +76,7 @@ function inicia() {
   }
 
   // SPRITES
-  sprite = [
+  sprites = [
     new Imagem(
       tela.largura * 0.1,
       tela.altura * 0.5,
@@ -94,6 +92,7 @@ function inicia() {
   // POWER-UP
   powerUp = new Imagem(0, 0, document.getElementById('power-up'))
   powerUp.x = Math.random() * tela.largura + tela.largura * 2
+  powerUp.y = Math.random() * (tela.altura / 2)
   powerUp.deltaX = -4
 
   ratoX = 0
@@ -111,10 +110,10 @@ function desenha() {
   contexto.clearRect(0, 0, tela.largura, tela.altura)
 
   // FUNDO
-  fundo[0].deltaX = -1
-  fundo[0].desenha(tela)
-  fundo[1].deltaX = -1
-  fundo[1].desenha(tela)
+  for (let i = 0; i < fundo.length; i++) {
+    fundo[i].deltaX = -1
+    fundo[i].desenha(tela)
+  }
 
   if (fundo[0].x + tela.largura == 0 && fundo[1].x == 0) {
     fundo[0].x = 0
@@ -129,8 +128,10 @@ function desenha() {
       asteroides[i].y = Math.random() * (tela.altura - asteroides[i].altura)
     }
     // COLISÃO COM SPRITE
-    if (sprite[0].colide(asteroides[i])) {
-      continua = false
+    for (let i = 0; i < sprites.length; i++) {
+      if (sprites[i].colide(asteroides[i])) {
+        continua = false
+      }
     }
   }
 
@@ -139,9 +140,9 @@ function desenha() {
   const sprite2 = document.getElementById('sprite-2')
 
   if (sprite1.classList == 'hidden') {
-    sprite[1].desenha(tela)
+    sprites[1].desenha(tela)
   } else if (sprite2.classList == 'hidden') {
-    sprite[0].desenha(tela)
+    sprites[0].desenha(tela)
   }
 
   // POWER-UP
@@ -182,15 +183,17 @@ function processaTeclaPremida(tecla) {
     // esquerda
   }
   if (tecla.code == 'ArrowUp') {
-    sprite[0].deltaY = -3
-    sprite[1].deltaY = -3
+    for (let i = 0; i < sprites.length; i++) {
+      sprites[i].deltaY = -3
+    }
   }
   if (tecla.code == 'ArrowRight') {
     // direita
   }
   if (tecla.code == 'ArrowDown') {
-    sprite[0].deltaY = 3
-    sprite[1].deltaY = 3
+    for (let i = 0; i < sprites.length; i++) {
+      sprites[i].deltaY = 3
+    }
   }
 }
 
@@ -202,7 +205,9 @@ function processaTeclaLibertada(tecla) {
     //...
   }
   if (tecla.code == 'ArrowUp' || tecla.code == 'ArrowDown') {
-    sprite[0].deltaY = 0
+    for (let i = 0; i < sprites.length; i++) {
+      sprites[i].deltaY = 0
+    }
   }
 }
 

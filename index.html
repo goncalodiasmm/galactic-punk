@@ -22,13 +22,17 @@
     <div id="ecra-inicial" class="flex flex-col items-center p-24 gap-8 bg-black max-w-screen-xl">
         <img src="./recursos/logo.png" alt="logo">
         <div class="flex flex-row items-center gap-4">
-            <i onclick="escolherSprite()" class="ri-arrow-left-s-line text-6xl text-white cursor-pointer transition-all transform hover:scale-125" id="prev-sprite"></i>
+            <i onclick="escolherSprite()"
+                class="ri-arrow-left-s-line text-6xl text-white cursor-pointer transition-all transform hover:scale-125"
+                id="prev-sprite"></i>
             <img src="./recursos/sprite-1.png" alt="sprite-1" id="sprite-1">
             <img src="./recursos/sprite-2.png" alt="sprite-2" id="sprite-2" class="hidden">
-            <i onclick="escolherSprite()" class="ri-arrow-right-s-line text-6xl text-white cursor-pointer transition-all transform hover:scale-125" id="next-sprite"></i>
+            <i onclick="escolherSprite()"
+                class="ri-arrow-right-s-line text-6xl text-white cursor-pointer transition-all transform hover:scale-125"
+                id="next-sprite"></i>
         </div>
         <div class="flex flex-col gap-4">
-            <button id="config"
+            <button id="configuracoes"
                 class="bg-transparent border-2 border-solid border-white text-white text-2xl py-2 px-8 font-orbitron hover:bg-white hover:text-black transition-all">Configurações</button>
             <button onclick="comecarJogo()" id="jogar"
                 class="bg-transparent border-2 border-solid border-white text-white text-2xl py-2 px-8 font-orbitron hover:bg-white hover:text-black transition-all">Jogar</button>
@@ -40,7 +44,7 @@
         </canvas>
         <span class="text-3xl font-black font-orbitron text-white absolute top-8 left-8" id="pontuacao">0</span>
         <button id="pausa">
-            <i class="ri-pause-circle-line text-6xl text-white absolute top-8 right-8"></i>
+            <i onclick="pausarJogo()" class="ri-pause-circle-line text-6xl text-white absolute top-8 right-8"></i>
         </button>
     </div>
     <!-- RECURSOS PARA JOGO -->
