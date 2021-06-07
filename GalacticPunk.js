@@ -56,7 +56,7 @@ function inicia() {
   // FUNDO
   fundo = [
     new Imagem(0, 0, document.getElementById('fundo')),
-    new Imagem(tela.largura - 1, 0, document.getElementById('fundo')),
+    new Imagem(tela.largura, 0, document.getElementById('fundo')),
   ]
 
   // ASTEROIDES
@@ -76,6 +76,12 @@ function inicia() {
     asteroides[i].deltaX = -4
   }
 
+  // POWER-UP
+  powerUp = new Imagem(0, 0, document.getElementById('power-up'))
+  powerUp.x = Math.random() * tela.largura + tela.largura * 2
+  powerUp.y = Math.random() * (tela.altura / 2)
+  powerUp.deltaX = -4
+
   // SPRITES
   sprites = [
     new Imagem(
@@ -89,12 +95,6 @@ function inicia() {
       document.getElementById('sprite-2')
     ),
   ]
-
-  // POWER-UP
-  powerUp = new Imagem(0, 0, document.getElementById('power-up'))
-  powerUp.x = Math.random() * tela.largura + tela.largura * 2
-  powerUp.y = Math.random() * (tela.altura / 2)
-  powerUp.deltaX = -4
 
   ratoX = 0
   ratoY = 0
@@ -114,11 +114,11 @@ function desenha() {
   for (let i = 0; i < fundo.length; i++) {
     fundo[i].deltaX = -1
     fundo[i].desenha(tela)
-  }
 
-  if (fundo[0].x + tela.largura == 0 && fundo[1].x == 0) {
-    fundo[0].x = 0
-    fundo[1].x = tela.largura
+    if (fundo[0].x + tela.largura == 0 && fundo[1].x == 0) {
+      fundo[0].x = 0
+      fundo[1].x = tela.largura
+    }
   }
 
   // ASTEROIDES
@@ -132,9 +132,18 @@ function desenha() {
     for (let i = 0; i < sprites.length; i++) {
       if (sprites[i].colide(asteroides[i])) {
         continua = false
-        localStorage.setItem('Pontuação Máxima', contador)
+        if (contador > melhor) {
+          localStorage.setItem('Pontuação Máxima', contador)
+        }
       }
     }
+  }
+
+  // POWER-UP
+  powerUp.desenha(tela)
+  if (powerUp.x + powerUp.largura < 0) {
+    powerUp.x = Math.random() * tela.largura + tela.largura
+    powerUp.y = Math.random() * (tela.altura - powerUp.altura)
   }
 
   // SPRITES
@@ -147,19 +156,13 @@ function desenha() {
     sprites[0].desenha(tela)
   }
 
-  // POWER-UP
-  powerUp.desenha(tela)
-  if (powerUp.x + powerUp.largura < 0) {
-    powerUp.x = Math.random() * tela.largura + tela.largura
-    powerUp.y = Math.random() * (tela.altura - powerUp.altura)
-  }
-
   if (continua) {
     contador++
     pontuacaoAtual.innerHTML = contador
     requestAnimationFrame(desenha)
   }
 }
+
 function processaBotaoPremido(rato) {
   ratoX = Math.floor(rato.offsetX * racioX)
   ratoY = Math.floor(rato.offsetY * racioY)
