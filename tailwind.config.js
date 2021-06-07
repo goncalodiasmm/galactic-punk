@@ -4,8 +4,17 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        'orbitron': ['Orbitron', 'sans']
-      }
+        orbitron: ['Orbitron', 'sans'],
+      },
+      keyframes: {
+        progress: {
+          '0%': { width: '100%' },
+          '100%': { width: '0%' },
+        },
+      },
+      animation: {
+        progress: 'progress 5s linear',
+      },
     },
   },
   variants: {

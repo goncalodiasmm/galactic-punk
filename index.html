@@ -19,7 +19,7 @@
 
 <body>
     <!-- ESTILIZAÇÃO DOS ECRÃS -->
-    <div id="ecra-inicial" class="hidden flex-col items-center p-24 gap-8 bg-black max-w-screen-xl">
+    <div id="ecra-inicial" class="flex flex-col items-center p-24 gap-8 bg-black max-w-screen-xl">
         <img src="./recursos/logo.png" alt="logo">
         <div class="flex flex-row items-center gap-4">
             <i onclick="escolherSprite()"
@@ -38,8 +38,8 @@
                 class="bg-transparent border-2 border-solid border-white text-white text-2xl py-2 px-8 font-orbitron hover:bg-white hover:text-black transition-all">Jogar</button>
         </div>
     </div>
-    <div id="ecra-jogo" class="relative max-w-screen-xl max-h-96">
-        <canvas id="tela" width="1280" height="673" class="absolute">O seu <em>browser</em> não suporta o elemento
+    <div id="ecra-jogo" class="relative max-w-screen-xl hidden">
+        <canvas id="tela" width="1280" height="673" class="">O seu <em>browser</em> não suporta o elemento
             <code>canvas</code>!
         </canvas>
         <span class="text-3xl font-black font-orbitron text-white absolute top-8 left-8" id="pontuacao-atual">0</span>
@@ -47,7 +47,8 @@
             id="pontuacao-maxima">0</span>
         <div
             class="flex items-center w-64 h-4 absolute top-12 left-1/2 transform -translate-x-1/2 bg-black rounded-full">
-            <span class="w-1/2 h-3 absolute top-0.5 bg-yellow-400 rounded-full" id="barra-progresso"></span>
+            <span class="h-full absolute bg-yellow-400 rounded-full animate-progress hidden"
+                id="barra-progresso"></span>
         </div>
         <button id="pausa">
             <i onclick="pausarJogo()" class="ri-pause-circle-line text-6xl text-white absolute top-8 right-8"></i>

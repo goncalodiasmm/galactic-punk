@@ -31174,6 +31174,26 @@ video {
   }
 }
 
+@-webkit-keyframes progress {
+  0% {
+    width: 100%;
+  }
+
+  100% {
+    width: 0%;
+  }
+}
+
+@keyframes progress {
+  0% {
+    width: 100%;
+  }
+
+  100% {
+    width: 0%;
+  }
+}
+
 .animate-none {
   -webkit-animation: none;
           animation: none;
@@ -31197,6 +31217,11 @@ video {
 .animate-bounce {
   -webkit-animation: bounce 1s infinite;
           animation: bounce 1s infinite;
+}
+
+.animate-progress {
+  -webkit-animation: progress 5s linear;
+          animation: progress 5s linear;
 }
 
 .mix-blend-normal {
@@ -62405,6 +62430,11 @@ video {
             animation: bounce 1s infinite;
   }
 
+  .sm\:animate-progress {
+    -webkit-animation: progress 5s linear;
+            animation: progress 5s linear;
+  }
+
   .sm\:mix-blend-normal {
     mix-blend-mode: normal;
   }
@@ -93518,6 +93548,11 @@ video {
   .md\:animate-bounce {
     -webkit-animation: bounce 1s infinite;
             animation: bounce 1s infinite;
+  }
+
+  .md\:animate-progress {
+    -webkit-animation: progress 5s linear;
+            animation: progress 5s linear;
   }
 
   .md\:mix-blend-normal {
@@ -124635,6 +124670,11 @@ video {
             animation: bounce 1s infinite;
   }
 
+  .lg\:animate-progress {
+    -webkit-animation: progress 5s linear;
+            animation: progress 5s linear;
+  }
+
   .lg\:mix-blend-normal {
     mix-blend-mode: normal;
   }
@@ -155750,6 +155790,11 @@ video {
             animation: bounce 1s infinite;
   }
 
+  .xl\:animate-progress {
+    -webkit-animation: progress 5s linear;
+            animation: progress 5s linear;
+  }
+
   .xl\:mix-blend-normal {
     mix-blend-mode: normal;
   }
@@ -186863,6 +186908,11 @@ video {
   .\32xl\:animate-bounce {
     -webkit-animation: bounce 1s infinite;
             animation: bounce 1s infinite;
+  }
+
+  .\32xl\:animate-progress {
+    -webkit-animation: progress 5s linear;
+            animation: progress 5s linear;
   }
 
   .\32xl\:mix-blend-normal {

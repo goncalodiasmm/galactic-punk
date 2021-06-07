@@ -16,7 +16,7 @@ function comecarJogo() {
 // ECRÃ DE JOGO
 function pausarJogo() {
   const ecraJogo = document.getElementById('ecra-jogo')
-  ecraJogo.classList.add('bg-black')
+  ecraJogo.classList.toggle('bg-black')
 }
 
 // MECÂNICA DE JOGO
@@ -28,7 +28,7 @@ var contador
 var fundo
 var asteroides
 var sprites
-var powerup
+var powerUp
 
 var racioX
 var racioY
@@ -58,6 +58,9 @@ function inicia() {
     new Imagem(0, 0, document.getElementById('fundo')),
     new Imagem(tela.largura, 0, document.getElementById('fundo')),
   ]
+  for (let i = 0; i < fundo.length; i++) {
+    fundo[i].deltaX = -1
+  }
 
   // ASTEROIDES
   asteroides = [
@@ -79,7 +82,7 @@ function inicia() {
   // POWER-UP
   powerUp = new Imagem(0, 0, document.getElementById('power-up'))
   powerUp.x = Math.random() * tela.largura + tela.largura * 2
-  powerUp.y = Math.random() * (tela.altura / 2)
+  powerUp.y = Math.random() * tela.altura
   powerUp.deltaX = -4
 
   // SPRITES
@@ -112,13 +115,12 @@ function desenha() {
 
   // FUNDO
   for (let i = 0; i < fundo.length; i++) {
-    fundo[i].deltaX = -1
     fundo[i].desenha(tela)
+  }
 
-    if (fundo[0].x + tela.largura == 0 && fundo[1].x == 0) {
-      fundo[0].x = 0
-      fundo[1].x = tela.largura
-    }
+  if (fundo[0].x + tela.largura == 0 && fundo[1].x == 0) {
+    fundo[0].x = 0
+    fundo[1].x = tela.largura
   }
 
   // ASTEROIDES
@@ -141,6 +143,24 @@ function desenha() {
 
   // POWER-UP
   powerUp.desenha(tela)
+
+  for (let i = 0; i < sprites.length; i++) {
+    if (powerUp.colide(sprites[i])) {
+      const barraProgresso = document.getElementById('barra-progresso')
+      barraProgresso.classList.remove('hidden')
+      powerUp.visivel = false
+      for (let i = 0; i < asteroides.length; i++) {
+        asteroides[i].visivel = false
+        asteroides[i].activo = false
+        setTimeout(() => {
+          asteroides[i].x = Math.random() * tela.largura + tela.largura
+          asteroides[i].visivel = true
+          asteroides[i].activo = true
+        }, 5000)
+      }
+    }
+  }
+
   if (powerUp.x + powerUp.largura < 0) {
     powerUp.x = Math.random() * tela.largura + tela.largura
     powerUp.y = Math.random() * (tela.altura - powerUp.altura)
@@ -182,10 +202,8 @@ function processaBotaoLibertado(rato) {
 
 function processaTeclaPremida(tecla) {
   if (tecla.code == 'Space') {
-    // barra de espaços
   }
   if (tecla.code == 'ArrowLeft') {
-    // esquerda
   }
   if (tecla.code == 'ArrowUp') {
     for (let i = 0; i < sprites.length; i++) {
@@ -193,7 +211,6 @@ function processaTeclaPremida(tecla) {
     }
   }
   if (tecla.code == 'ArrowRight') {
-    // direita
   }
   if (tecla.code == 'ArrowDown') {
     for (let i = 0; i < sprites.length; i++) {
@@ -204,10 +221,8 @@ function processaTeclaPremida(tecla) {
 
 function processaTeclaLibertada(tecla) {
   if (tecla.code == 'Space') {
-    //...
   }
   if (tecla.code == 'ArrowLeft' || tecla.code == 'ArrowRight') {
-    //...
   }
   if (tecla.code == 'ArrowUp' || tecla.code == 'ArrowDown') {
     for (let i = 0; i < sprites.length; i++) {
