@@ -7,6 +7,8 @@ function escolherSprite() {
 }
 
 function comecarJogo() {
+  inicia()
+  desenha()
   const ecraInicial = document.getElementById('ecra-inicial')
   const ecraJogo = document.getElementById('ecra-jogo')
   ecraInicial.classList.add('hidden')
@@ -48,7 +50,6 @@ function inicia() {
 
   // PONTUAÇÃO
   pontuacaoAtual = document.getElementById('pontuacao-atual')
-
   pontuacaoMaxima = document.getElementById('pontuacao-maxima')
   melhor = localStorage.getItem('Pontuação Máxima')
   pontuacaoMaxima.innerHTML = melhor
@@ -131,8 +132,8 @@ function desenha() {
       asteroides[i].y = Math.random() * (tela.altura - asteroides[i].altura)
     }
     // COLISÃO COM SPRITE
-    for (let i = 0; i < sprites.length; i++) {
-      if (sprites[i].colide(asteroides[i])) {
+    for (let j = 0; j < sprites.length; j++) {
+      if (sprites[j].colide(asteroides[i])) {
         continua = false
         if (contador > melhor) {
           localStorage.setItem('Pontuação Máxima', contador)
@@ -149,13 +150,13 @@ function desenha() {
       const barraProgresso = document.getElementById('barra-progresso')
       barraProgresso.classList.remove('hidden')
       powerUp.visivel = false
-      for (let i = 0; i < asteroides.length; i++) {
-        asteroides[i].visivel = false
-        asteroides[i].activo = false
+      for (let j = 0; j < asteroides.length; j++) {
+        asteroides[j].visivel = false
+        asteroides[j].activo = false
         setTimeout(() => {
-          asteroides[i].x = Math.random() * tela.largura + tela.largura
-          asteroides[i].visivel = true
-          asteroides[i].activo = true
+          asteroides[j].x = Math.random() * tela.largura + tela.largura
+          asteroides[j].visivel = true
+          asteroides[j].activo = true
         }, 5000)
       }
     }
@@ -231,9 +232,5 @@ function processaTeclaLibertada(tecla) {
   }
 }
 
-window.onload = function () {
-  inicia()
-  desenha()
-}
 window.onkeydown = processaTeclaPremida
 window.onkeyup = processaTeclaLibertada
