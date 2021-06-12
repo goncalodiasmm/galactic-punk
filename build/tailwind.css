@@ -11489,6 +11489,10 @@ video {
   height: 100vh;
 }
 
+.h-game {
+  height: 673px;
+}
+
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
@@ -27107,6 +27111,10 @@ video {
   width: max-content;
 }
 
+.w-game {
+  width: 1280px;
+}
+
 .z-0 {
   z-index: 0;
 }
@@ -31194,6 +31202,26 @@ video {
   }
 }
 
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0.5;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0.5;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
 .animate-none {
   -webkit-animation: none;
           animation: none;
@@ -31222,6 +31250,16 @@ video {
 .animate-progress {
   -webkit-animation: progress 5s linear;
           animation: progress 5s linear;
+}
+
+.animate-fadeIn {
+  -webkit-animation: fadeIn 1s ease-in;
+          animation: fadeIn 1s ease-in;
+}
+
+.animate-fadeOut {
+  -webkit-animation: fadeOut 1s ease-out;
+          animation: fadeOut 1s ease-out;
 }
 
 .mix-blend-normal {
@@ -42797,6 +42835,10 @@ video {
 
   .sm\:h-screen {
     height: 100vh;
+  }
+
+  .sm\:h-game {
+    height: 673px;
   }
 
   .sm\:text-xs {
@@ -58404,6 +58446,10 @@ video {
     width: max-content;
   }
 
+  .sm\:w-game {
+    width: 1280px;
+  }
+
   .sm\:z-0 {
     z-index: 0;
   }
@@ -62433,6 +62479,16 @@ video {
   .sm\:animate-progress {
     -webkit-animation: progress 5s linear;
             animation: progress 5s linear;
+  }
+
+  .sm\:animate-fadeIn {
+    -webkit-animation: fadeIn 1s ease-in;
+            animation: fadeIn 1s ease-in;
+  }
+
+  .sm\:animate-fadeOut {
+    -webkit-animation: fadeOut 1s ease-out;
+            animation: fadeOut 1s ease-out;
   }
 
   .sm\:mix-blend-normal {
@@ -73917,6 +73973,10 @@ video {
 
   .md\:h-screen {
     height: 100vh;
+  }
+
+  .md\:h-game {
+    height: 673px;
   }
 
   .md\:text-xs {
@@ -89524,6 +89584,10 @@ video {
     width: max-content;
   }
 
+  .md\:w-game {
+    width: 1280px;
+  }
+
   .md\:z-0 {
     z-index: 0;
   }
@@ -93553,6 +93617,16 @@ video {
   .md\:animate-progress {
     -webkit-animation: progress 5s linear;
             animation: progress 5s linear;
+  }
+
+  .md\:animate-fadeIn {
+    -webkit-animation: fadeIn 1s ease-in;
+            animation: fadeIn 1s ease-in;
+  }
+
+  .md\:animate-fadeOut {
+    -webkit-animation: fadeOut 1s ease-out;
+            animation: fadeOut 1s ease-out;
   }
 
   .md\:mix-blend-normal {
@@ -105037,6 +105111,10 @@ video {
 
   .lg\:h-screen {
     height: 100vh;
+  }
+
+  .lg\:h-game {
+    height: 673px;
   }
 
   .lg\:text-xs {
@@ -120644,6 +120722,10 @@ video {
     width: max-content;
   }
 
+  .lg\:w-game {
+    width: 1280px;
+  }
+
   .lg\:z-0 {
     z-index: 0;
   }
@@ -124673,6 +124755,16 @@ video {
   .lg\:animate-progress {
     -webkit-animation: progress 5s linear;
             animation: progress 5s linear;
+  }
+
+  .lg\:animate-fadeIn {
+    -webkit-animation: fadeIn 1s ease-in;
+            animation: fadeIn 1s ease-in;
+  }
+
+  .lg\:animate-fadeOut {
+    -webkit-animation: fadeOut 1s ease-out;
+            animation: fadeOut 1s ease-out;
   }
 
   .lg\:mix-blend-normal {
@@ -136157,6 +136249,10 @@ video {
 
   .xl\:h-screen {
     height: 100vh;
+  }
+
+  .xl\:h-game {
+    height: 673px;
   }
 
   .xl\:text-xs {
@@ -151764,6 +151860,10 @@ video {
     width: max-content;
   }
 
+  .xl\:w-game {
+    width: 1280px;
+  }
+
   .xl\:z-0 {
     z-index: 0;
   }
@@ -155793,6 +155893,16 @@ video {
   .xl\:animate-progress {
     -webkit-animation: progress 5s linear;
             animation: progress 5s linear;
+  }
+
+  .xl\:animate-fadeIn {
+    -webkit-animation: fadeIn 1s ease-in;
+            animation: fadeIn 1s ease-in;
+  }
+
+  .xl\:animate-fadeOut {
+    -webkit-animation: fadeOut 1s ease-out;
+            animation: fadeOut 1s ease-out;
   }
 
   .xl\:mix-blend-normal {
@@ -167277,6 +167387,10 @@ video {
 
   .\32xl\:h-screen {
     height: 100vh;
+  }
+
+  .\32xl\:h-game {
+    height: 673px;
   }
 
   .\32xl\:text-xs {
@@ -182884,6 +182998,10 @@ video {
     width: max-content;
   }
 
+  .\32xl\:w-game {
+    width: 1280px;
+  }
+
   .\32xl\:z-0 {
     z-index: 0;
   }
@@ -186913,6 +187031,16 @@ video {
   .\32xl\:animate-progress {
     -webkit-animation: progress 5s linear;
             animation: progress 5s linear;
+  }
+
+  .\32xl\:animate-fadeIn {
+    -webkit-animation: fadeIn 1s ease-in;
+            animation: fadeIn 1s ease-in;
+  }
+
+  .\32xl\:animate-fadeOut {
+    -webkit-animation: fadeOut 1s ease-out;
+            animation: fadeOut 1s ease-out;
   }
 
   .\32xl\:mix-blend-normal {

@@ -15,6 +15,12 @@ module.exports = {
       animation: {
         progress: 'progress 5s linear',
       },
+      width: {
+        'game': '1280px',
+      },
+      height: {
+        'game': '673px',
+      }
     },
   },
   variants: {

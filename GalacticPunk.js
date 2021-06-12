@@ -6,25 +6,51 @@ function escolherSprite() {
   sprite2.classList.toggle('hidden')
 }
 
-function comecarJogo() {
+function iniciarJogo() {
   inicia()
   desenha()
   const ecraInicial = document.getElementById('ecra-inicial')
   const ecraJogo = document.getElementById('ecra-jogo')
+  ecraInicial.classList.remove('flex')
   ecraInicial.classList.add('hidden')
   ecraJogo.classList.remove('hidden')
 }
 
-// ECRÃ DE JOGO
+// ECRÃ DE PAUSA
 function pausarJogo() {
+  continua = false
   const ecraJogo = document.getElementById('ecra-jogo')
-  ecraJogo.classList.toggle('bg-black')
+  const ecraPausa = document.getElementById('ecra-pausa')
+  ecraJogo.classList.add('hidden')
+  ecraPausa.classList.remove('hidden')
+  ecraPausa.classList.add('flex')
+}
+
+function continuarJogo() {
+  const ecraJogo = document.getElementById('ecra-jogo')
+  const ecraPausa = document.getElementById('ecra-pausa')
+  ecraJogo.classList.remove('hidden')
+  ecraPausa.classList.remove('flex')
+  ecraPausa.classList.add('hidden')
+  continua = true
+  desenha()
+}
+
+function recomecarJogo() {
+  const ecraJogo = document.getElementById('ecra-jogo')
+  const ecraPausa = document.getElementById('ecra-pausa')
+  ecraJogo.classList.remove('hidden')
+  ecraPausa.classList.remove('flex')
+  ecraPausa.classList.add('hidden')
+  continua = true
+  inicia()
+  desenha()
 }
 
 // MECÂNICA DE JOGO
 var tela
 var contexto
-var continua
+var continua = true
 var contador
 
 var fundo
@@ -45,7 +71,6 @@ function inicia() {
   // TELA
   tela = new Tela(document.getElementById('tela'))
   contexto = tela.contexto
-  continua = true
   contador = 0
 
   // PONTUAÇÃO

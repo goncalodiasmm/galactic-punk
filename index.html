@@ -19,7 +19,7 @@
 
 <body>
     <!-- ECRÃ INICIAL -->
-    <div id="ecra-inicial" class="flex flex-col items-center p-24 gap-8 bg-black max-w-screen-xl">
+    <div id="ecra-inicial" class="flex flex-col items-center p-24 gap-8 bg-black w-game h-game">
         <img src="./recursos/logo.png" alt="logo">
         <div class="flex flex-row items-center gap-4">
             <i onclick="escolherSprite()"
@@ -32,13 +32,27 @@
         <div class="flex flex-col gap-4">
             <button id="configuracoes"
                 class="bg-transparent border-2 border-solid border-white text-white text-2xl py-2 px-8 font-orbitron hover:bg-white hover:text-black transition-all">Configurações</button>
-            <button onclick="comecarJogo()" id="jogar"
+            <button onclick="iniciarJogo()" id="iniciar"
                 class="bg-transparent border-2 border-solid border-white text-white text-2xl py-2 px-8 font-orbitron hover:bg-white hover:text-black transition-all">Jogar</button>
         </div>
     </div>
+
+    <!-- ECRÃ PAUSA -->
+    <div id="ecra-pausa" class="hidden flex-col items-center p-24 gap-8 bg-black w-game h-game">
+        <img src="./recursos/logo.png" alt="logo">
+        <div class="flex flex-col gap-4">
+            <button onclick="continuarJogo()" id="continuar"
+                class="bg-transparent border-2 border-solid border-white text-white text-2xl py-2 px-8 font-orbitron hover:bg-white hover:text-black transition-all">Continuar</button>
+            <button onclick="recomecarJogo()" id="recomecar"
+                class="bg-transparent border-2 border-solid border-white text-white text-2xl py-2 px-8 font-orbitron hover:bg-white hover:text-black transition-all">Recomeçar</button>
+            <button onclick="comecarJogo()" id="jogar"
+                class="bg-transparent border-2 border-solid border-white text-white text-2xl py-2 px-8 font-orbitron hover:bg-white hover:text-black transition-all">Ajuda</button>
+        </div>
+    </div>
+
     <!-- ECRÃ DE JOGO (CANVAS E HUD) -->
-    <div id="ecra-jogo" class="relative max-w-screen-xl hidden">
-        <canvas id="tela" width="1280" height="673" class="">O seu <em>browser</em> não suporta o elemento
+    <div id="ecra-jogo" class="relative w-game h-game hidden">
+        <canvas id="tela" width="1280" height="673">O seu <em>browser</em> não suporta o elemento
             <code>canvas</code>!
         </canvas>
         <span class="text-3xl font-black font-orbitron text-white absolute top-8 left-8" id="pontuacao-atual">0</span>
