@@ -47,6 +47,19 @@ function recomecarJogo() {
   desenha()
 }
 
+function controlarVolume() {
+  const volume = document.getElementById('volume')
+  const bgMusica = document.getElementById('bg-musica')
+  volume.classList.toggle('ri-volume-mute-fill')
+  volume.classList.toggle('ri-volume-up-fill')
+  if (bgMusica.paused) {
+    bgMusica.play()
+  } else {
+    bgMusica.pause()
+  }
+}
+
+
 // MECÂNICA DE JOGO
 var tela
 var contexto
@@ -159,7 +172,7 @@ function desenha() {
     // COLISÃO COM SPRITE
     for (let j = 0; j < sprites.length; j++) {
       if (sprites[j].colide(asteroides[i])) {
-        continua = false
+        // continua = false
         if (contador > melhor) {
           localStorage.setItem('Pontuação Máxima', contador)
         }
@@ -182,6 +195,9 @@ function desenha() {
           asteroides[j].x = Math.random() * tela.largura + tela.largura
           asteroides[j].visivel = true
           asteroides[j].activo = true
+          powerUp.x = Math.random() * tela.largura + tela.largura * 2
+          powerUp.visivel = true
+          barraProgresso.classList.add('hidden')
         }, 5000)
       }
     }

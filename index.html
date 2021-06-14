@@ -19,8 +19,11 @@
 
 <body>
     <!-- ECRÃ INICIAL -->
-    <div id="ecra-inicial" class="flex flex-col items-center p-24 gap-8 bg-black w-game h-game">
+    <div id="ecra-inicial" class="flex flex-col items-center p-24 gap-8 bg-black w-game h-game relative">
         <img src="./recursos/logo.png" alt="logo">
+        <i onclick="controlarVolume()"
+            class="ri-volume-mute-fill text-white text-5xl absolute top-6 right-12 cursor-pointer" id="volume"></i>
+        <audio src="./recursos/bg-musica.mp3" id="bg-musica"></audio>
         <div class="flex flex-row items-center gap-4">
             <i onclick="escolherSprite()"
                 class="ri-arrow-left-s-line text-6xl text-white cursor-pointer transition-all transform hover:scale-125"></i>
@@ -30,16 +33,20 @@
                 class="ri-arrow-right-s-line text-6xl text-white cursor-pointer transition-all transform hover:scale-125"></i>
         </div>
         <div class="flex flex-col gap-4">
-            <button id="configuracoes"
-                class="bg-transparent border-2 border-solid border-white text-white text-2xl py-2 px-8 font-orbitron hover:bg-white hover:text-black transition-all">Configurações</button>
             <button onclick="iniciarJogo()" id="iniciar"
                 class="bg-transparent border-2 border-solid border-white text-white text-2xl py-2 px-8 font-orbitron hover:bg-white hover:text-black transition-all">Jogar</button>
+            <button id="configuracoes"
+                class="bg-transparent border-2 border-solid border-white text-white text-2xl py-2 px-8 font-orbitron hover:bg-white hover:text-black transition-all">Configurações</button>
+            <button id="ajuda"
+                class="bg-transparent border-2 border-solid border-white text-white text-2xl py-2 px-8 font-orbitron hover:bg-white hover:text-black transition-all">Ajuda</button>
         </div>
     </div>
 
     <!-- ECRÃ PAUSA -->
-    <div id="ecra-pausa" class="hidden flex-col items-center p-24 gap-8 bg-black w-game h-game">
+    <div id="ecra-pausa" class="hidden flex-col items-center p-24 gap-8 bg-black w-game h-game relative">
         <img src="./recursos/logo.png" alt="logo">
+        <i onclick="controlarVolume()"
+            class="ri-volume-mute-fill text-white text-5xl absolute top-6 right-12 cursor-pointer" id="volume"></i>
         <div class="flex flex-col gap-4">
             <button onclick="continuarJogo()" id="continuar"
                 class="bg-transparent border-2 border-solid border-white text-white text-2xl py-2 px-8 font-orbitron hover:bg-white hover:text-black transition-all">Continuar</button>
@@ -58,10 +65,9 @@
         <span class="text-3xl font-black font-orbitron text-white absolute top-8 left-8" id="pontuacao-atual">0</span>
         <span class="text-lg font-black font-orbitron text-yellow-400 absolute top-16 left-8"
             id="pontuacao-maxima">0</span>
-        <div
-            class="flex items-center w-64 h-4 absolute top-12 left-1/2 transform -translate-x-1/2 bg-black rounded-full">
-            <span class="h-full absolute bg-yellow-400 rounded-full animate-progress hidden"
-                id="barra-progresso"></span>
+        <div class="hidden items-center w-64 h-4 absolute top-12 left-1/2 transform -translate-x-1/2 bg-black rounded-full"
+            id="barra-progresso">
+            <span class="h-full absolute bg-yellow-400 rounded-full animate-progress"></span>
         </div>
         <button id="pausa">
             <i onclick="pausarJogo()" class="ri-pause-circle-line text-6xl text-white absolute top-8 right-8"></i>

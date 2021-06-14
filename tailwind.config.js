@@ -16,11 +16,11 @@ module.exports = {
         progress: 'progress 5s linear',
       },
       width: {
-        'game': '1280px',
+        game: '1280px',
       },
       height: {
-        'game': '673px',
-      }
+        game: '673px',
+      },
     },
   },
   variants: {
