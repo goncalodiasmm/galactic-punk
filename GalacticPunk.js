@@ -38,8 +38,11 @@ function continuarJogo() {
 
 function recomecarJogo() {
   const ecraJogo = document.getElementById('ecra-jogo')
+  const ecraFinal = document.getElementById('ecra-final')
   const ecraPausa = document.getElementById('ecra-pausa')
   ecraJogo.classList.remove('hidden')
+  ecraFinal.classList.remove('flex')
+  ecraFinal.classList.add('hidden')
   ecraPausa.classList.remove('flex')
   ecraPausa.classList.add('hidden')
   continua = true
@@ -59,6 +62,18 @@ function controlarVolume() {
   }
 }
 
+// ECRÃ FINAL
+function finalizarJogo() {
+  const ecraJogo = document.getElementById('ecra-jogo')
+  const ecraFinal = document.getElementById('ecra-final')
+  const pontuacaoAtualFinal = document.getElementById('pontuacao-atual-final')
+  const pontuacaoMaximaFinal = document.getElementById('pontuacao-maxima-final')
+  pontuacaoAtualFinal.innerHTML = final
+  pontuacaoMaximaFinal.innerHTML = maxima
+  ecraJogo.classList.add('hidden')
+  ecraFinal.classList.remove('hidden')
+  ecraFinal.classList.add('flex')
+}
 
 // MECÂNICA DE JOGO
 var tela
@@ -89,8 +104,9 @@ function inicia() {
   // PONTUAÇÃO
   pontuacaoAtual = document.getElementById('pontuacao-atual')
   pontuacaoMaxima = document.getElementById('pontuacao-maxima')
-  melhor = localStorage.getItem('Pontuação Máxima')
-  pontuacaoMaxima.innerHTML = melhor
+  maxima = localStorage.getItem('pontuacaoMaxima')
+  final = localStorage.getItem('pontuacaoFinal')
+  pontuacaoMaxima.innerHTML = maxima
 
   // FUNDO
   fundo = [
@@ -172,9 +188,11 @@ function desenha() {
     // COLISÃO COM SPRITE
     for (let j = 0; j < sprites.length; j++) {
       if (sprites[j].colide(asteroides[i])) {
-        // continua = false
-        if (contador > melhor) {
-          localStorage.setItem('Pontuação Máxima', contador)
+        continua = false
+        finalizarJogo()
+        localStorage.setItem('pontuacaoFinal', contador)
+        if (contador > maxima) {
+          localStorage.setItem('pontuacaoMaxima', contador)
         }
       }
     }
