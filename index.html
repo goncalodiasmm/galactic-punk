@@ -20,25 +20,29 @@
 <body class="font-orbitron text-white">
     <!-- ECRÃ INICIAL -->
     <div id="ecra-inicial" class="flex flex-col items-center p-24 gap-8 bg-black w-game h-game relative">
-        <img src="./recursos/logo.png" alt="logo">
-        <i onclick="controlarVolume()"
-            class="ri-volume-mute-fill text-white text-5xl absolute top-6 right-12 cursor-pointer" id="volume"></i>
-        <audio src="./recursos/bg-musica.mp3" id="bg-musica"></audio>
-        <div class="flex flex-row items-center gap-4">
-            <i onclick="escolherSprite()"
-                class="ri-arrow-left-s-line text-6xl text-white cursor-pointer transition-all transform hover:scale-125"></i>
-            <img src="./recursos/sprite-1.png" alt="sprite-1" id="sprite-1">
-            <img src="./recursos/sprite-2.png" alt="sprite-2" id="sprite-2" class="hidden">
-            <i onclick="escolherSprite()"
-                class="ri-arrow-right-s-line text-6xl text-white cursor-pointer transition-all transform hover:scale-125"></i>
-        </div>
-        <div class="flex flex-col gap-4">
-            <button onclick="iniciarJogo()" id="iniciar"
-                class="bg-transparent border-2 border-solid border-white text-white text-2xl py-2 px-8 font-orbitron hover:bg-white hover:text-black transition-all">Jogar</button>
-            <button id="configuracoes"
-                class="bg-transparent border-2 border-solid border-white text-white text-2xl py-2 px-8 font-orbitron hover:bg-white hover:text-black transition-all">Configurações</button>
-            <button id="ajuda"
-                class="bg-transparent border-2 border-solid border-white text-white text-2xl py-2 px-8 font-orbitron hover:bg-white hover:text-black transition-all">Ajuda</button>
+        <video width="1280" height="673" autoplay loop muted class="absolute top-0 w-game h-game z-0">
+            <source src="./recursos/bg-video.mp4" type="video/mp4">
+        </video>
+        <div class="flex flex-col items-center gap-4 z-10">
+            <img src="./recursos/logo.png" alt="logo">
+            <i onclick="controlarVolume()"
+                class="ri-volume-mute-fill text-white text-5xl absolute top-6 right-12 cursor-pointer" id="volume"></i>
+            <div class="flex flex-row items-center gap-4">
+                <i onclick="escolherSprite()"
+                    class="ri-arrow-left-s-line text-6xl text-white cursor-pointer transition-all transform hover:scale-125"></i>
+                <img src="./recursos/sprite-1.png" alt="sprite-1" id="sprite-1">
+                <img src="./recursos/sprite-2.png" alt="sprite-2" id="sprite-2" class="hidden">
+                <i onclick="escolherSprite()"
+                    class="ri-arrow-right-s-line text-6xl text-white cursor-pointer transition-all transform hover:scale-125"></i>
+            </div>
+            <div class="flex flex-col gap-4">
+                <button onclick="iniciarJogo()" id="iniciar"
+                    class="bg-transparent border-2 border-solid border-white text-white text-2xl py-2 px-8 font-orbitron hover:bg-white hover:text-black transition-all">Jogar</button>
+                <button id="configuracoes"
+                    class="bg-transparent border-2 border-solid border-white text-white text-2xl py-2 px-8 font-orbitron hover:bg-white hover:text-black transition-all">Configurações</button>
+                <button id="ajuda"
+                    class="bg-transparent border-2 border-solid border-white text-white text-2xl py-2 px-8 font-orbitron hover:bg-white hover:text-black transition-all">Ajuda</button>
+            </div>
         </div>
     </div>
 
@@ -102,6 +106,9 @@
         <img id="power-up" src="./recursos/power-up.png" alt="power-up">
         <img id="sprite-1" src="./recursos/sprite-1.png" alt="sprite-1">
         <img id="sprite-2" src="./recursos/sprite-2.png" alt="sprite-2">
+        <audio src="./recursos/bg-musica.mp3" id="bg-musica"></audio>
+        <audio src="./recursos/ui-selecionar.mp3" id="ui-selecionar"></audio>
+        <audio src="./recursos/ui-iniciar.mp3" id="ui-iniciar"></audio>
     </div>
 </body>
 

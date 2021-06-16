@@ -2,6 +2,8 @@
 function escolherSprite() {
   const sprite1 = document.getElementById('sprite-1')
   const sprite2 = document.getElementById('sprite-2')
+  const uiSelecionar = document.getElementById('ui-selecionar')
+  uiSelecionar.play()
   sprite1.classList.toggle('hidden')
   sprite2.classList.toggle('hidden')
 }
@@ -11,6 +13,8 @@ function iniciarJogo() {
   desenha()
   const ecraInicial = document.getElementById('ecra-inicial')
   const ecraJogo = document.getElementById('ecra-jogo')
+  const uiIniciar = document.getElementById('ui-iniciar')
+  uiIniciar.play()
   ecraInicial.classList.remove('flex')
   ecraInicial.classList.add('hidden')
   ecraJogo.classList.remove('hidden')
@@ -21,6 +25,8 @@ function pausarJogo() {
   continua = false
   const ecraJogo = document.getElementById('ecra-jogo')
   const ecraPausa = document.getElementById('ecra-pausa')
+  const uiSelecionar = document.getElementById('ui-selecionar')
+  uiSelecionar.play()
   ecraJogo.classList.add('hidden')
   ecraPausa.classList.remove('hidden')
   ecraPausa.classList.add('flex')
@@ -29,6 +35,8 @@ function pausarJogo() {
 function continuarJogo() {
   const ecraJogo = document.getElementById('ecra-jogo')
   const ecraPausa = document.getElementById('ecra-pausa')
+  const uiSelecionar = document.getElementById('ui-selecionar')
+  uiSelecionar.play()
   ecraJogo.classList.remove('hidden')
   ecraPausa.classList.remove('flex')
   ecraPausa.classList.add('hidden')
@@ -40,6 +48,8 @@ function recomecarJogo() {
   const ecraJogo = document.getElementById('ecra-jogo')
   const ecraFinal = document.getElementById('ecra-final')
   const ecraPausa = document.getElementById('ecra-pausa')
+  const uiIniciar = document.getElementById('ui-iniciar')
+  uiIniciar.play()
   ecraJogo.classList.remove('hidden')
   ecraFinal.classList.remove('flex')
   ecraFinal.classList.add('hidden')
@@ -190,6 +200,7 @@ function desenha() {
       if (sprites[j].colide(asteroides[i])) {
         continua = false
         finalizarJogo()
+        console.log(sprites[j].x, sprites[j].y)
         localStorage.setItem('pontuacaoFinal', contador)
         if (contador > maxima) {
           localStorage.setItem('pontuacaoMaxima', contador)
@@ -268,6 +279,7 @@ function processaTeclaPremida(tecla) {
   if (tecla.code == 'ArrowUp') {
     for (let i = 0; i < sprites.length; i++) {
       sprites[i].deltaY = -3
+      console.log(sprites[i].y);
     }
   }
   if (tecla.code == 'ArrowRight') {
@@ -275,6 +287,7 @@ function processaTeclaPremida(tecla) {
   if (tecla.code == 'ArrowDown') {
     for (let i = 0; i < sprites.length; i++) {
       sprites[i].deltaY = 3
+      console.log(sprites[i].y)
     }
   }
 }
@@ -287,6 +300,7 @@ function processaTeclaLibertada(tecla) {
   if (tecla.code == 'ArrowUp' || tecla.code == 'ArrowDown') {
     for (let i = 0; i < sprites.length; i++) {
       sprites[i].deltaY = 0
+      console.log(sprites[i].y)
     }
   }
 }
