@@ -2,8 +2,6 @@
 function escolherSprite() {
   const sprite1 = document.getElementById('sprite-1')
   const sprite2 = document.getElementById('sprite-2')
-  const uiSelecionar = document.getElementById('ui-selecionar')
-  uiSelecionar.play()
   sprite1.classList.toggle('hidden')
   sprite2.classList.toggle('hidden')
 }
@@ -13,8 +11,6 @@ function iniciarJogo() {
   desenha()
   const ecraInicial = document.getElementById('ecra-inicial')
   const ecraJogo = document.getElementById('ecra-jogo')
-  const uiIniciar = document.getElementById('ui-iniciar')
-  uiIniciar.play()
   ecraInicial.classList.remove('flex')
   ecraInicial.classList.add('hidden')
   ecraJogo.classList.remove('hidden')
@@ -25,8 +21,6 @@ function pausarJogo() {
   continua = false
   const ecraJogo = document.getElementById('ecra-jogo')
   const ecraPausa = document.getElementById('ecra-pausa')
-  const uiSelecionar = document.getElementById('ui-selecionar')
-  uiSelecionar.play()
   ecraJogo.classList.add('hidden')
   ecraPausa.classList.remove('hidden')
   ecraPausa.classList.add('flex')
@@ -35,8 +29,6 @@ function pausarJogo() {
 function continuarJogo() {
   const ecraJogo = document.getElementById('ecra-jogo')
   const ecraPausa = document.getElementById('ecra-pausa')
-  const uiSelecionar = document.getElementById('ui-selecionar')
-  uiSelecionar.play()
   ecraJogo.classList.remove('hidden')
   ecraPausa.classList.remove('flex')
   ecraPausa.classList.add('hidden')
@@ -48,8 +40,6 @@ function recomecarJogo() {
   const ecraJogo = document.getElementById('ecra-jogo')
   const ecraFinal = document.getElementById('ecra-final')
   const ecraPausa = document.getElementById('ecra-pausa')
-  const uiIniciar = document.getElementById('ui-iniciar')
-  uiIniciar.play()
   ecraJogo.classList.remove('hidden')
   ecraFinal.classList.remove('flex')
   ecraFinal.classList.add('hidden')
@@ -61,10 +51,12 @@ function recomecarJogo() {
 }
 
 function controlarVolume() {
-  const volume = document.getElementById('volume')
+  const volume = document.querySelectorAll('.volume')
   const bgMusica = document.getElementById('bg-musica')
-  volume.classList.toggle('ri-volume-mute-fill')
-  volume.classList.toggle('ri-volume-up-fill')
+  volume.forEach((botao) => {
+    botao.classList.toggle('ri-volume-mute-fill')
+    botao.classList.toggle('ri-volume-up-fill')
+  })
   if (bgMusica.paused) {
     bgMusica.play()
   } else {
@@ -188,6 +180,18 @@ function desenha() {
     fundo[1].x = tela.largura
   }
 
+  // SPRITES
+  const sprite1 = document.getElementById('sprite-1')
+  const sprite2 = document.getElementById('sprite-2')
+
+  if (sprite1.classList == 'hidden') {
+    sprites[1].desenha(tela)
+    sprites[0].activo = false
+  } else if (sprite2.classList == 'hidden') {
+    sprites[0].desenha(tela)
+    sprites[1].activo = false
+  }
+
   // ASTEROIDES
   for (let i = 0; i < asteroides.length; i++) {
     asteroides[i].desenha(tela)
@@ -198,13 +202,13 @@ function desenha() {
     // COLISÃO COM SPRITE
     for (let j = 0; j < sprites.length; j++) {
       if (sprites[j].colide(asteroides[i])) {
-        continua = false
-        finalizarJogo()
         console.log(sprites[j].x, sprites[j].y)
         localStorage.setItem('pontuacaoFinal', contador)
         if (contador > maxima) {
           localStorage.setItem('pontuacaoMaxima', contador)
         }
+        finalizarJogo()
+        continua = false
       }
     }
   }
@@ -235,16 +239,6 @@ function desenha() {
   if (powerUp.x + powerUp.largura < 0) {
     powerUp.x = Math.random() * tela.largura + tela.largura
     powerUp.y = Math.random() * (tela.altura - powerUp.altura)
-  }
-
-  // SPRITES
-  const sprite1 = document.getElementById('sprite-1')
-  const sprite2 = document.getElementById('sprite-2')
-
-  if (sprite1.classList == 'hidden') {
-    sprites[1].desenha(tela)
-  } else if (sprite2.classList == 'hidden') {
-    sprites[0].desenha(tela)
   }
 
   if (continua) {
@@ -279,7 +273,7 @@ function processaTeclaPremida(tecla) {
   if (tecla.code == 'ArrowUp') {
     for (let i = 0; i < sprites.length; i++) {
       sprites[i].deltaY = -3
-      console.log(sprites[i].y);
+      console.log(sprites[i].y)
     }
   }
   if (tecla.code == 'ArrowRight') {
