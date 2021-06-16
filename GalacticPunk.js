@@ -2,8 +2,52 @@
 function escolherSprite() {
   const sprite1 = document.getElementById('sprite-1')
   const sprite2 = document.getElementById('sprite-2')
+  const uiSelecionar = document.getElementById('ui-selecionar')
+  uiSelecionar.play()
   sprite1.classList.toggle('hidden')
   sprite2.classList.toggle('hidden')
+}
+
+function nivelDificuldade(dificuldade) {
+  const dificuldadeFacil = document.getElementById('dificuldade-facil')
+  const dificuldadeNormal = document.getElementById('dificuldade-normal')
+  const dificuldadeDificil = document.getElementById('dificuldade-dificil')
+  const nomeFacil = document.getElementById('nome-facil')
+  const nomeNormal = document.getElementById('nome-normal')
+  const nomeDificil = document.getElementById('nome-dificil')
+
+  if (dificuldade === 1) {
+    dificuldadeFacil.classList.add('text-4xl')
+    dificuldadeNormal.classList.remove('text-4xl')
+    dificuldadeDificil.classList.remove('text-4xl')
+    nomeFacil.classList.remove('hidden')
+    nomeNormal.classList.add('hidden')
+    nomeDificil.classList.add('hidden')
+    const uiSelecionar = document.getElementById('ui-selecionar')
+    uiSelecionar.play()
+  }
+
+  if (dificuldade === 2) {
+    dificuldadeFacil.classList.remove('text-4xl')
+    dificuldadeNormal.classList.add('text-4xl')
+    dificuldadeDificil.classList.remove('text-4xl')
+    nomeNormal.classList.remove('hidden')
+    nomeFacil.classList.add('hidden')
+    nomeDificil.classList.add('hidden')
+    const uiSelecionar = document.getElementById('ui-selecionar')
+    uiSelecionar.play()
+  }
+
+  if (dificuldade === 3) {
+    dificuldadeFacil.classList.remove('text-4xl')
+    dificuldadeNormal.classList.remove('text-4xl')
+    dificuldadeDificil.classList.add('text-4xl')
+    nomeDificil.classList.remove('hidden')
+    nomeFacil.classList.add('hidden')
+    nomeNormal.classList.add('hidden')
+    const uiSelecionar = document.getElementById('ui-selecionar')
+    uiSelecionar.play()
+  }
 }
 
 function iniciarJogo() {
@@ -11,6 +55,8 @@ function iniciarJogo() {
   desenha()
   const ecraInicial = document.getElementById('ecra-inicial')
   const ecraJogo = document.getElementById('ecra-jogo')
+  const uiIniciar = document.getElementById('ui-iniciar')
+  uiIniciar.play()
   ecraInicial.classList.remove('flex')
   ecraInicial.classList.add('hidden')
   ecraJogo.classList.remove('hidden')
@@ -21,6 +67,8 @@ function pausarJogo() {
   continua = false
   const ecraJogo = document.getElementById('ecra-jogo')
   const ecraPausa = document.getElementById('ecra-pausa')
+  const uiSelecionar = document.getElementById('ui-selecionar')
+  uiSelecionar.play()
   ecraJogo.classList.add('hidden')
   ecraPausa.classList.remove('hidden')
   ecraPausa.classList.add('flex')
@@ -40,6 +88,8 @@ function recomecarJogo() {
   const ecraJogo = document.getElementById('ecra-jogo')
   const ecraFinal = document.getElementById('ecra-final')
   const ecraPausa = document.getElementById('ecra-pausa')
+  const bgMusica = document.getElementById('bg-musica')
+  bgMusica.volume = 1
   ecraJogo.classList.remove('hidden')
   ecraFinal.classList.remove('flex')
   ecraFinal.classList.add('hidden')
@@ -53,9 +103,9 @@ function recomecarJogo() {
 function controlarVolume() {
   const volume = document.querySelectorAll('.volume')
   const bgMusica = document.getElementById('bg-musica')
-  volume.forEach((botao) => {
-    botao.classList.toggle('ri-volume-mute-fill')
-    botao.classList.toggle('ri-volume-up-fill')
+  volume.forEach((btn) => {
+    btn.classList.toggle('ri-volume-mute-fill')
+    btn.classList.toggle('ri-volume-up-fill')
   })
   if (bgMusica.paused) {
     bgMusica.play()
@@ -70,11 +120,15 @@ function finalizarJogo() {
   const ecraFinal = document.getElementById('ecra-final')
   const pontuacaoAtualFinal = document.getElementById('pontuacao-atual-final')
   const pontuacaoMaximaFinal = document.getElementById('pontuacao-maxima-final')
-  pontuacaoAtualFinal.innerHTML = final
+  pontuacaoAtualFinal.innerHTML = contador
   pontuacaoMaximaFinal.innerHTML = maxima
   ecraJogo.classList.add('hidden')
   ecraFinal.classList.remove('hidden')
   ecraFinal.classList.add('flex')
+}
+
+function voltarAoInicio() {
+  location.reload()
 }
 
 // MECÂNICA DE JOGO
@@ -97,17 +151,35 @@ var ratoY
 var angulo
 var amplitude
 
+var dificuldade
+var dificuldadeFacil = 1.08
+var dificuldadeNormal = 1.16
+var dificuldadeDificil = 1.24
+
 function inicia() {
   // TELA
   tela = new Tela(document.getElementById('tela'))
   contexto = tela.contexto
   contador = 0
 
+  // NÍVEIS DE DIFICULDADE
+  const nomeFacil = document.getElementById('nome-facil')
+  const nomeNormal = document.getElementById('nome-normal')
+  const nomeDificil = document.getElementById('nome-dificil')
+  if (!nomeFacil.classList.contains('hidden')) {
+    dificuldade = dificuldadeFacil
+  }
+  if (!nomeNormal.classList.contains('hidden')) {
+    dificuldade = dificuldadeNormal
+  }
+  if (!nomeDificil.classList.contains('hidden')) {
+    dificuldade = dificuldadeDificil
+  }
+
   // PONTUAÇÃO
   pontuacaoAtual = document.getElementById('pontuacao-atual')
   pontuacaoMaxima = document.getElementById('pontuacao-maxima')
   maxima = localStorage.getItem('pontuacaoMaxima')
-  final = localStorage.getItem('pontuacaoFinal')
   pontuacaoMaxima.innerHTML = maxima
 
   // FUNDO
@@ -133,7 +205,7 @@ function inicia() {
   for (let i = 0; i < asteroides.length; i++) {
     asteroides[i].x = Math.random() * tela.largura + tela.largura
     asteroides[i].y = Math.random() * (tela.altura - asteroides[i].altura)
-    asteroides[i].deltaX = -4
+    asteroides[i].deltaX += -4
   }
 
   // POWER-UP
@@ -198,11 +270,16 @@ function desenha() {
     if (asteroides[i].x + asteroides[i].largura < 0) {
       asteroides[i].x = Math.random() * tela.largura + tela.largura
       asteroides[i].y = Math.random() * (tela.altura - asteroides[i].altura)
+      asteroides[i].deltaX *= dificuldade
     }
     // COLISÃO COM SPRITE
     for (let j = 0; j < sprites.length; j++) {
       if (sprites[j].colide(asteroides[i])) {
         console.log(sprites[j].x, sprites[j].y)
+        const impacto = document.getElementById('impacto')
+        const bgMusica = document.getElementById('bg-musica')
+        bgMusica.volume = 0.2
+        impacto.play()
         localStorage.setItem('pontuacaoFinal', contador)
         if (contador > maxima) {
           localStorage.setItem('pontuacaoMaxima', contador)
@@ -243,7 +320,15 @@ function desenha() {
 
   if (continua) {
     contador++
-    pontuacaoAtual.innerHTML = contador
+    if (dificuldade === dificuldadeFacil) {
+      pontuacaoAtual.innerHTML = contador * dificuldadeFacil.toFixed(0)
+    }
+    if (dificuldade === dificuldadeNormal) {
+      pontuacaoAtual.innerHTML = contador * dificuldadeNormal.toFixed(0)
+    }
+    if (dificuldade === dificuldadeDificil) {
+      pontuacaoAtual.innerHTML = contador * dificuldadeDificil.toFixed(0)
+    }
     requestAnimationFrame(desenha)
   }
 }

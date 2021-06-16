@@ -26,22 +26,42 @@
         <div class="flex flex-col items-center gap-4 z-10">
             <img src="./recursos/logo.png" alt="logo">
             <i onclick="controlarVolume()"
-                class="ri-volume-mute-fill text-white text-5xl absolute top-6 right-12 cursor-pointer volume"></i>
+                class="ri-volume-mute-fill text-5xl absolute top-6 right-12 cursor-pointer volume"></i>
             <div class="flex flex-row items-center gap-4">
                 <i onclick="escolherSprite()"
-                    class="ri-arrow-left-s-line text-6xl text-white cursor-pointer transition-all transform hover:scale-125"></i>
+                    class="ri-arrow-left-s-line text-6xl cursor-pointer transition-all transform hover:scale-125"></i>
                 <img src="./recursos/sprite-1.png" alt="sprite-1" id="sprite-1">
                 <img src="./recursos/sprite-2.png" alt="sprite-2" id="sprite-2" class="hidden">
                 <i onclick="escolherSprite()"
-                    class="ri-arrow-right-s-line text-6xl text-white cursor-pointer transition-all transform hover:scale-125"></i>
+                    class="ri-arrow-right-s-line text-6xl cursor-pointer transition-all transform hover:scale-125"></i>
+            </div>
+            <div class="flex flex-row items-center gap-4">
+                <div class="flex flex-col items-center">
+                    <i onclick="nivelDificuldade(1)"
+                        class="ri-checkbox-blank-circle-fill text-green-500 text-2xl cursor-pointer transition-all"
+                        id="dificuldade-facil"></i>
+                    <small id="nome-facil" class="hidden transition-all">Fácil</small>
+                </div>
+                <div class="flex flex-col items-center">
+                    <i onclick="nivelDificuldade(2)"
+                        class="ri-checkbox-blank-circle-fill  text-yellow-400 text-4xl cursor-pointer transition-all"
+                        id="dificuldade-normal"></i>
+                    <small id="nome-normal" class="transition-all">Normal</small>
+                </div>
+                <div class="flex flex-col items-center">
+                    <i onclick="nivelDificuldade(3)"
+                        class="ri-checkbox-blank-circle-fill  text-red-600 text-2xl cursor-pointer transition-all"
+                        id="dificuldade-dificil"></i>
+                    <small id="nome-dificil" class="hidden transition-all">Difícil</small>
+                </div>
             </div>
             <div class="flex flex-col gap-4">
                 <button onclick="iniciarJogo()" id="iniciar"
-                    class="bg-transparent border-2 border-solid border-white text-white text-2xl py-2 px-8 font-orbitron hover:bg-white hover:text-black transition-all">Jogar</button>
+                    class="bg-transparent border-2 border-solid border-white text-2xl py-2 px-8 hover:bg-white hover:text-black transition-all">Jogar</button>
                 <button id="configuracoes"
-                    class="bg-transparent border-2 border-solid border-white text-white text-2xl py-2 px-8 font-orbitron hover:bg-white hover:text-black transition-all">Configurações</button>
+                    class="bg-transparent border-2 border-solid border-white text-2xl py-2 px-8 hover:bg-white hover:text-black transition-all">Configurações</button>
                 <button id="ajuda"
-                    class="bg-transparent border-2 border-solid border-white text-white text-2xl py-2 px-8 font-orbitron hover:bg-white hover:text-black transition-all">Ajuda</button>
+                    class="bg-transparent border-2 border-solid border-white text-2xl py-2 px-8 hover:bg-white hover:text-black transition-all">Ajuda</button>
             </div>
         </div>
     </div>
@@ -50,29 +70,36 @@
     <div id="ecra-pausa" class="hidden flex-col items-center p-24 gap-8 bg-black w-game h-game relative">
         <img src="./recursos/logo.png" alt="logo">
         <i onclick="controlarVolume()"
-            class="ri-volume-mute-fill text-white text-5xl absolute top-6 right-12 cursor-pointer volume"></i>
+            class="ri-volume-mute-fill text-5xl absolute top-6 right-12 cursor-pointer volume"></i>
         <div class="flex flex-col gap-4">
             <button onclick="continuarJogo()" id="continuar"
-                class="bg-transparent border-2 border-solid border-white text-white text-2xl py-2 px-8 font-orbitron hover:bg-white hover:text-black transition-all">Continuar</button>
+                class="bg-transparent border-2 border-solid border-white text-2xl py-2 px-8 hover:bg-white hover:text-black transition-all">Continuar</button>
             <button onclick="recomecarJogo()" id="recomecar"
-                class="bg-transparent border-2 border-solid border-white text-white text-2xl py-2 px-8 font-orbitron hover:bg-white hover:text-black transition-all">Recomeçar</button>
+                class="bg-transparent border-2 border-solid border-white text-2xl py-2 px-8 hover:bg-white hover:text-black transition-all">Recomeçar</button>
             <button onclick="comecarJogo()" id="jogar"
-                class="bg-transparent border-2 border-solid border-white text-white text-2xl py-2 px-8 font-orbitron hover:bg-white hover:text-black transition-all">Ajuda</button>
+                class="bg-transparent border-2 border-solid border-white text-2xl py-2 px-8 hover:bg-white hover:text-black transition-all">Ajuda</button>
+            <button onclick="voltarAoInicio()"
+                class="bg-transparent border-2 border-solid border-white text-2xl py-2 px-8 hover:bg-white hover:text-black transition-all">Voltar
+                ao início</button>
         </div>
     </div>
 
     <!-- ECRÃ FINAL -->
     <div id="ecra-final" class="hidden flex-col items-center p-24 gap-8 bg-black w-game h-game relative">
-        <h1 class="text-white text-6xl font-bold">Game Over</h1>
+        <h1 class="text-6xl font-bold">Game Over</h1>
         <p class="text-3xl">Pontuação: <span class="font-bold" id="pontuacao-atual-final"></span></p>
-        <p class="text-3xl">Pontuação Máxima: <span class="font-bold text-yellow-400" id="pontuacao-maxima-final"></span></p>
+        <p class="text-3xl">Pontuação Máxima: <span class="font-bold text-yellow-400"
+                id="pontuacao-maxima-final"></span></p>
         <i onclick="controlarVolume()"
-            class="ri-volume-mute-fill text-white text-5xl absolute top-6 right-12 cursor-pointer" id="volume"></i>
+            class="ri-volume-mute-fill text-5xl absolute top-6 right-12 cursor-pointer volume"></i>
         <div class="flex flex-col gap-4">
             <button onclick="recomecarJogo()" id="recomecar"
-                class="bg-transparent border-2 border-solid border-white text-white text-2xl py-2 px-8 font-orbitron hover:bg-white hover:text-black transition-all">Recomeçar</button>
-            <button onclick="comecarJogo()" id="jogar"
-                class="bg-transparent border-2 border-solid border-white text-white text-2xl py-2 px-8 font-orbitron hover:bg-white hover:text-black transition-all">Ajuda</button>
+                class="bg-transparent border-2 border-solid border-white text-2xl py-2 px-8 hover:bg-white hover:text-black transition-all">Recomeçar</button>
+            <button
+                class="bg-transparent border-2 border-solid border-white text-2xl py-2 px-8 hover:bg-white hover:text-black transition-all">Ajuda</button>
+            <button onclick="voltarAoInicio()"
+                class="bg-transparent border-2 border-solid border-white text-2xl py-2 px-8 hover:bg-white hover:text-black transition-all">Voltar
+                ao início</button>
         </div>
     </div>
 
@@ -81,9 +108,8 @@
         <canvas id="tela" width="1280" height="673">O seu <em>browser</em> não suporta o elemento
             <code>canvas</code>!
         </canvas>
-        <span class="text-3xl font-black font-orbitron text-white absolute top-8 left-8" id="pontuacao-atual">0</span>
-        <span class="text-lg font-black font-orbitron text-yellow-400 absolute top-16 left-8"
-            id="pontuacao-maxima">0</span>
+        <span class="text-3xl font-black absolute top-8 left-8" id="pontuacao-atual">0</span>
+        <span class="text-lg font-black text-yellow-400 absolute top-16 left-8" id="pontuacao-maxima">0</span>
         <div class="hidden items-center w-64 h-4 absolute top-12 left-1/2 transform -translate-x-1/2 bg-black rounded-full"
             id="barra-progresso">
             <span class="h-full absolute bg-yellow-400 rounded-full animate-progress"></span>
@@ -109,6 +135,7 @@
         <audio src="./recursos/bg-musica.mp3" id="bg-musica"></audio>
         <audio src="./recursos/ui-selecionar.mp3" id="ui-selecionar"></audio>
         <audio src="./recursos/ui-iniciar.mp3" id="ui-iniciar"></audio>
+        <audio src="./recursos/impacto.mp3" id="impacto"></audio>
     </div>
 </body>
 
