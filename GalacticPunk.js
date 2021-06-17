@@ -121,6 +121,9 @@ function finalizarJogo() {
   const pontuacaoAtualFinal = document.getElementById('pontuacao-atual-final')
   const pontuacaoMaximaFinal = document.getElementById('pontuacao-maxima-final')
   pontuacaoAtualFinal.innerHTML = contador
+  if (contador > maxima) {
+    maxima = contador
+  }
   pontuacaoMaximaFinal.innerHTML = maxima
   ecraJogo.classList.add('hidden')
   ecraFinal.classList.remove('hidden')
@@ -150,6 +153,9 @@ var ratoY
 
 var angulo
 var amplitude
+
+var pontuacaoAtual
+var pontuacaoMaxima
 
 var dificuldade
 var dificuldadeFacil = 1.08
@@ -275,9 +281,8 @@ function desenha() {
     // COLISÃO COM SPRITE
     for (let j = 0; j < sprites.length; j++) {
       if (sprites[j].colide(asteroides[i])) {
-        console.log(sprites[j].x, sprites[j].y)
-        const impacto = document.getElementById('impacto')
-        const bgMusica = document.getElementById('bg-musica')
+        let impacto = document.getElementById('impacto')
+        let bgMusica = document.getElementById('bg-musica')
         bgMusica.volume = 0.2
         impacto.play()
         localStorage.setItem('pontuacaoFinal', contador)
@@ -321,13 +326,16 @@ function desenha() {
   if (continua) {
     contador++
     if (dificuldade === dificuldadeFacil) {
-      pontuacaoAtual.innerHTML = contador * dificuldadeFacil.toFixed(0)
+      let contadorFacil = contador * dificuldadeFacil.toFixed(0)
+      pontuacaoAtual.innerHTML = contadorFacil
     }
     if (dificuldade === dificuldadeNormal) {
-      pontuacaoAtual.innerHTML = contador * dificuldadeNormal.toFixed(0)
+      let contadorNormal = contador * dificuldadeNormal.toFixed(0)
+      pontuacaoAtual.innerHTML = contadorNormal
     }
     if (dificuldade === dificuldadeDificil) {
-      pontuacaoAtual.innerHTML = contador * dificuldadeDificil.toFixed(0)
+      let contadorDificil = contador * dificuldadeNormal.toFixed(0)
+      pontuacaoAtual.innerHTML = contadorDificil
     }
     requestAnimationFrame(desenha)
   }
@@ -358,7 +366,6 @@ function processaTeclaPremida(tecla) {
   if (tecla.code == 'ArrowUp') {
     for (let i = 0; i < sprites.length; i++) {
       sprites[i].deltaY = -3
-      console.log(sprites[i].y)
     }
   }
   if (tecla.code == 'ArrowRight') {
@@ -366,7 +373,6 @@ function processaTeclaPremida(tecla) {
   if (tecla.code == 'ArrowDown') {
     for (let i = 0; i < sprites.length; i++) {
       sprites[i].deltaY = 3
-      console.log(sprites[i].y)
     }
   }
 }
@@ -379,7 +385,6 @@ function processaTeclaLibertada(tecla) {
   if (tecla.code == 'ArrowUp' || tecla.code == 'ArrowDown') {
     for (let i = 0; i < sprites.length; i++) {
       sprites[i].deltaY = 0
-      console.log(sprites[i].y)
     }
   }
 }
