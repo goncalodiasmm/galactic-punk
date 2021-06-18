@@ -62,6 +62,22 @@ function iniciarJogo() {
   ecraJogo.classList.remove('hidden')
 }
 
+function abrirAjuda() {
+  const modalAjuda = document.getElementById('modal-ajuda')
+  modalAjuda.classList.remove('hidden')
+  modalAjuda.classList.add('flex')
+  const uiSelecionar = document.getElementById('ui-selecionar')
+  uiSelecionar.play()
+}
+
+function fecharAjuda() {
+  const modalAjuda = document.getElementById('modal-ajuda')
+  modalAjuda.classList.add('hidden')
+  modalAjuda.classList.remove('flex')
+  const uiSelecionar = document.getElementById('ui-selecionar')
+  uiSelecionar.play()
+}
+
 // ECRÃ DE PAUSA
 function pausarJogo() {
   continua = false
@@ -270,6 +286,22 @@ function desenha() {
     sprites[1].activo = false
   }
 
+  // COLISÃO SPRITE - TELA
+  for (let i = 0; i < sprites.length; i++) {
+    if (sprites[i].y + sprites[i].altura > tela.altura || sprites[i].y < 0) {
+      let impacto = document.getElementById('impacto')
+      impacto.play()
+      let bgMusica = document.getElementById('bg-musica')
+      bgMusica.volume = 0.2
+      localStorage.setItem('pontuacaoFinal', contador)
+      if (contador > maxima) {
+        localStorage.setItem('pontuacaoMaxima', contador)
+      }
+      finalizarJogo()
+      continua = false
+    }
+  }
+
   // ASTEROIDES
   for (let i = 0; i < asteroides.length; i++) {
     asteroides[i].desenha(tela)
@@ -278,13 +310,13 @@ function desenha() {
       asteroides[i].y = Math.random() * (tela.altura - asteroides[i].altura)
       asteroides[i].deltaX *= dificuldade
     }
-    // COLISÃO COM SPRITE
+    // COLISÃO ASTEROIDES - SPRITE
     for (let j = 0; j < sprites.length; j++) {
       if (sprites[j].colide(asteroides[i])) {
         let impacto = document.getElementById('impacto')
+        impacto.play()
         let bgMusica = document.getElementById('bg-musica')
         bgMusica.volume = 0.2
-        impacto.play()
         localStorage.setItem('pontuacaoFinal', contador)
         if (contador > maxima) {
           localStorage.setItem('pontuacaoMaxima', contador)
@@ -298,11 +330,14 @@ function desenha() {
   // POWER-UP
   powerUp.desenha(tela)
 
+  // COLISÃO POWER-UP - SPRITE
   for (let i = 0; i < sprites.length; i++) {
     if (powerUp.colide(sprites[i])) {
       const barraProgresso = document.getElementById('barra-progresso')
       barraProgresso.classList.remove('hidden')
       powerUp.visivel = false
+      let powerUpSFX =  document.getElementById('power-up-sfx')
+      powerUpSFX.play()
       for (let j = 0; j < asteroides.length; j++) {
         asteroides[j].visivel = false
         asteroides[j].activo = false
@@ -334,7 +369,7 @@ function desenha() {
       pontuacaoAtual.innerHTML = contadorNormal
     }
     if (dificuldade === dificuldadeDificil) {
-      let contadorDificil = contador * dificuldadeNormal.toFixed(0)
+      let contadorDificil = contador * dificuldadeDificil.toFixed(0)
       pontuacaoAtual.innerHTML = contadorDificil
     }
     requestAnimationFrame(desenha)
