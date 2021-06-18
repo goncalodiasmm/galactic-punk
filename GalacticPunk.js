@@ -62,22 +62,6 @@ function iniciarJogo() {
   ecraJogo.classList.remove('hidden')
 }
 
-function abrirAjuda() {
-  const modalAjuda = document.getElementById('modal-ajuda')
-  modalAjuda.classList.remove('hidden')
-  modalAjuda.classList.add('flex')
-  const uiSelecionar = document.getElementById('ui-selecionar')
-  uiSelecionar.play()
-}
-
-function fecharAjuda() {
-  const modalAjuda = document.getElementById('modal-ajuda')
-  modalAjuda.classList.add('hidden')
-  modalAjuda.classList.remove('flex')
-  const uiSelecionar = document.getElementById('ui-selecionar')
-  uiSelecionar.play()
-}
-
 // ECRÃ DE PAUSA
 function pausarJogo() {
   continua = false
@@ -144,6 +128,26 @@ function finalizarJogo() {
   ecraJogo.classList.add('hidden')
   ecraFinal.classList.remove('hidden')
   ecraFinal.classList.add('flex')
+}
+
+function abrirAjuda() {
+  const modalAjuda = document.querySelectorAll('.modal-ajuda')
+  modalAjuda.forEach((modal) => {
+    modal.classList.add('flex')
+    modal.classList.remove('hidden')
+    const uiSelecionar = document.getElementById('ui-selecionar')
+    uiSelecionar.play()
+  })
+}
+
+function fecharAjuda() {
+  const modalAjuda = document.querySelectorAll('.modal-ajuda')
+  modalAjuda.forEach((modal) => {
+    modal.classList.remove('flex')
+    modal.classList.add('hidden')
+    const uiSelecionar = document.getElementById('ui-selecionar')
+    uiSelecionar.play()
+  })
 }
 
 function voltarAoInicio() {
@@ -336,7 +340,7 @@ function desenha() {
       const barraProgresso = document.getElementById('barra-progresso')
       barraProgresso.classList.remove('hidden')
       powerUp.visivel = false
-      let powerUpSFX =  document.getElementById('power-up-sfx')
+      let powerUpSFX = document.getElementById('power-up-sfx')
       powerUpSFX.play()
       for (let j = 0; j < asteroides.length; j++) {
         asteroides[j].visivel = false
