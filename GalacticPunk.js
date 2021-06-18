@@ -244,10 +244,6 @@ function inicia() {
       document.getElementById('sprite-2')
     ),
   ]
-
-  tela.elemento.onmousedown = processaBotaoPremido
-  tela.elemento.onmouseup = processaBotaoLibertado
-  tela.elemento.onmousemove = processaMovimento
 }
 
 function desenha() {
