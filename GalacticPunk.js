@@ -165,15 +165,6 @@ var asteroides
 var sprites
 var powerUp
 
-var racioX
-var racioY
-
-var ratoX
-var ratoY
-
-var angulo
-var amplitude
-
 var pontuacaoAtual
 var pontuacaoMaxima
 
@@ -253,12 +244,6 @@ function inicia() {
       document.getElementById('sprite-2')
     ),
   ]
-
-  ratoX = 0
-  ratoY = 0
-
-  racioX = tela.largura / tela.larguraFinal
-  racioY = tela.altura / tela.alturaFinal
 
   tela.elemento.onmousedown = processaBotaoPremido
   tela.elemento.onmouseup = processaBotaoLibertado
@@ -378,23 +363,6 @@ function desenha() {
     }
     requestAnimationFrame(desenha)
   }
-}
-
-function processaBotaoPremido(rato) {
-  ratoX = Math.floor(rato.offsetX * racioX)
-  ratoY = Math.floor(rato.offsetY * racioY)
-  //...
-}
-
-function processaMovimento(rato) {
-  ratoX = Math.floor(rato.offsetX * racioX)
-  ratoY = Math.floor(rato.offsetY * racioY)
-}
-
-function processaBotaoLibertado(rato) {
-  ratoX = Math.floor(rato.offsetX * racioX)
-  ratoY = Math.floor(rato.offsetY * racioY)
-  //...
 }
 
 function processaTeclaPremida(tecla) {
